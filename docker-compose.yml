@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - '3000:3000'
+      - '3031:3031' # for remote debugging
+    environment:
+      RACK_ENV: development
+      REDIS_URL: redis://redis
+      UNICORN_WORKERS: 1
+      BYEBUG_PORT: 3031
+
+  redis:
+    image: 'redis:latest'
